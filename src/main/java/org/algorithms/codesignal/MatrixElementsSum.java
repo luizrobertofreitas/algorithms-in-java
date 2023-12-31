@@ -1,6 +1,6 @@
 package org.algorithms.codesignal;
 
-import java.util.function.Function;
+import java.util.function.ToIntFunction;
 
 /*
     After becoming famous, the CodeBots decided to move into a new building together. Each of the rooms has a different cost,
@@ -12,7 +12,9 @@ import java.util.function.Function;
 */
 public class MatrixElementsSum {
 
-    public static final Function<Integer[][], Integer> COLUMN_SOLUTION = matrix -> {
+    private MatrixElementsSum() {}
+
+    public static final ToIntFunction<Integer[][]> COLUMN_SOLUTION = matrix -> {
         int sum = 0;
         int c = 0;
         for (int r = 0; r < matrix.length; r++) {
@@ -31,8 +33,7 @@ public class MatrixElementsSum {
         return sum;
     };
 
-    public static final Function<Integer[][], Integer> TRIVIAL_SOLUTION = matrix -> {
-        System.out.println(matrix[0].length);
+    public static final ToIntFunction<Integer[][]> TRIVIAL_SOLUTION = matrix -> {
         int[] hauntedColumns = new int[matrix[0].length];
         int sum = 0;
         for (Integer[] integers : matrix) {

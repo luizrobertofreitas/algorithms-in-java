@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Timeout;
 
 import java.util.Arrays;
 
-public class ArrayCrazyOpsTest {
+class ArrayCrazyOpsTest {
 
     @Test
     @Timeout(1)
-    public void deletionTest() {
+    void deletionTest() {
         Integer[] array = {10, 20, 30, 50, 40, 100, 90, 80, 70};
         Integer[] resultArray = ArrayCrazyOps.deleteFromArray(array, 3);
         System.out.println("Array: " + Arrays.toString(array));

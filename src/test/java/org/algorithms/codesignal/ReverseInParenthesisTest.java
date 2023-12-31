@@ -6,7 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 // Set a timeout of a second
-public class ReverseInParenthesisTest {
+class ReverseInParenthesisTest {
 
     @Timeout(1)
     @ParameterizedTest
@@ -19,7 +19,7 @@ public class ReverseInParenthesisTest {
             "(),",
             "(abc)d(efg),cbadgfe"
     })
-    public void run(String input, String expectedResult) {
+    void run(String input, String expectedResult) {
         if (expectedResult == null) expectedResult = "";
         Assertions.assertEquals(expectedResult, ReverseInParenthesis.SOLUTION.apply(input));
     }

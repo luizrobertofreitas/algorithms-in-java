@@ -1,7 +1,7 @@
 package org.algorithms.codesignal;
 
 import java.util.Stack;
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 /*
     Write a function that reverses characters in (possibly nested) parentheses in the input string.
@@ -25,7 +25,9 @@ import java.util.function.Function;
 */
 public final class ReverseInParenthesis {
 
-    public static final Function<String, String> SOLUTION = input -> {
+    private ReverseInParenthesis() {}
+
+    public static final UnaryOperator<String> SOLUTION = input -> {
         if (input == null) return "";
         if (!input.contains("(")) return input;
         while (input.contains("(")) {

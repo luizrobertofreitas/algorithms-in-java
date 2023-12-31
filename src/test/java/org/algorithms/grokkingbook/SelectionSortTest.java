@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Timeout;
 
 import java.util.Arrays;
 
-public class SelectionSortTest {
+class SelectionSortTest {
 
     @Test
     @Timeout(1)
-    public void test1() {
+    void test1() {
         Integer[] array = {50, 10, 30, 40, 90, 70, 20, 110, 20, 200, 140, 120};
         Integer[] sortedArrayResult = SelectionSort.SOLUTION.apply(array);
         Integer[] langSortedArray = Arrays.copyOf(array, array.length);
@@ -20,7 +20,7 @@ public class SelectionSortTest {
 
     @Test
     @Timeout(1)
-    public void test2() {
+    void test2() {
         Integer[] array = {50, Integer.MIN_VALUE, 30, 40, Integer.MAX_VALUE, 70, 20, 110, Integer.MAX_VALUE, 200, Integer.MAX_VALUE, 120};
         Integer[] sortedArrayResult = SelectionSort.SOLUTION.apply(array);
         Integer[] langSortedArray = Arrays.copyOf(array, array.length);

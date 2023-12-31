@@ -1,10 +1,13 @@
 package org.algorithms.others;
 
 import java.util.Stack;
-import java.util.function.Function;
+import java.util.function.Predicate;
 
 public final class ParenthesisMatch {
-    public static Function<String, Boolean> SOLUTION = input -> {
+
+    private ParenthesisMatch() {}
+
+    public static final Predicate<String> SOLUTION = input -> {
         final Stack<Character> stack = new Stack<>();
         for (char c : input.toCharArray()) {
             if (c == '(')

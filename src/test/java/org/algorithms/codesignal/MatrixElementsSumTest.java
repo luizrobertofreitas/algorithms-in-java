@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
 // Set a timeout of a second
-public class MatrixElementsSumTest {
+class MatrixElementsSumTest {
 
     @Test
     @Timeout(1)
-    public void test1() {
+    void test1() {
         final Integer[][] matrix = {
                 {0,1,1,2},
                 {0,5,0,0},
@@ -22,7 +22,7 @@ public class MatrixElementsSumTest {
 
     @Test
     @Timeout(1)
-    public void test2() {
+    void test2() {
         final Integer[][] matrix = {
                 {1,1,1,0},
                 {0,5,0,1},
@@ -35,7 +35,7 @@ public class MatrixElementsSumTest {
 
     @Test
     @Timeout(1)
-    public void test3() {
+    void test3() {
         final Integer[][] matrix = {
                 {1,1,1},
                 {2,2,2},
@@ -48,7 +48,7 @@ public class MatrixElementsSumTest {
 
     @Test
     @Timeout(1)
-    public void test4() {
+    void test4() {
         final Integer[][] matrix = {{0}};
         final Integer expectedResult = 0;
         executeColumnSolutionTest(matrix, expectedResult);
@@ -57,7 +57,7 @@ public class MatrixElementsSumTest {
 
     @Test
     @Timeout(1)
-    public void test5() {
+    void test5() {
         final Integer[][] matrix = {
                 {1},
                 {5},
@@ -71,7 +71,7 @@ public class MatrixElementsSumTest {
 
     @Test
     @Timeout(1)
-    public void test6() {
+    void test6() {
         final Integer[][] matrix = {
                 {1,2,3,4,5}
         };
@@ -82,7 +82,7 @@ public class MatrixElementsSumTest {
 
     @Test
     @Timeout(1)
-    public void test7() {
+    void test7() {
         final Integer[][] matrix = {
                 {2},
                 {5},
@@ -95,7 +95,7 @@ public class MatrixElementsSumTest {
 
     @Test
     @Timeout(1)
-    public void test8() {
+    void test8() {
         final Integer[][] matrix = {
                 {4,0,1},
                 {10,7,0},
@@ -109,7 +109,7 @@ public class MatrixElementsSumTest {
 
     @Test
     @Timeout(1)
-    public void test9() {
+    void test9() {
         final Integer[][] matrix = {
                 {1}
         };
@@ -119,10 +119,10 @@ public class MatrixElementsSumTest {
     }
 
     private void executeColumnSolutionTest(final Integer[][] matrix, final Integer expectedResult) {
-        Assertions.assertEquals(expectedResult, MatrixElementsSum.COLUMN_SOLUTION.apply(matrix));
+        Assertions.assertEquals(expectedResult, MatrixElementsSum.COLUMN_SOLUTION.applyAsInt(matrix));
     }
 
     private void executeTrivialSolutionTest(final Integer[][] matrix, final Integer expectedResult) {
-        Assertions.assertEquals(expectedResult, MatrixElementsSum.TRIVIAL_SOLUTION.apply(matrix));
+        Assertions.assertEquals(expectedResult, MatrixElementsSum.TRIVIAL_SOLUTION.applyAsInt(matrix));
     }
 }

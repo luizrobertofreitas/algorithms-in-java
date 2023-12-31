@@ -1,12 +1,14 @@
 package org.algorithms.grokkingbook;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 // O(n^2) algorithm
 public final class SelectionSort {
-    public static Function<Integer[], Integer[]> SOLUTION = array -> {
+
+    private SelectionSort() {}
+
+    public static final UnaryOperator<Integer[]> SOLUTION = array -> {
         Integer[] sortedArray = new Integer[array.length];
         Integer[] copyOfArray = Arrays.copyOf(array, array.length);
         for (int i = 0 ; i < copyOfArray.length ; i++) {
