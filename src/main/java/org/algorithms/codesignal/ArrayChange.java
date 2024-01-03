@@ -7,7 +7,7 @@ public final class ArrayChange {
 
     public static final ToIntFunction<Integer[]> SOLUTION = array -> {
         int moves = 0;
-        for (int i = 1; i < array.length; i++) if (array[i] == array[i-1]) {
+        for (int i = 1; i < array.length; i++) if (array[i].equals(array[i-1])) {
             moves++;
             array[i]++;
         } else if (array[i] < array[i-1]) {
