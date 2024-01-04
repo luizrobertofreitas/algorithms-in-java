@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class IPV4AddressValidatorTest {
+class IPv4AddressValidatorTest {
 
     @ParameterizedTest
     @CsvSource({
@@ -31,6 +31,6 @@ class IPV4AddressValidatorTest {
             "0..1.0.0,false",
     })
     void test(String input, Boolean expectedResult) {
-        Assertions.assertEquals(expectedResult, IPV4AddressValidator.SOLUTION.test(input));
+        Assertions.assertEquals(expectedResult, IPv4AddressValidator.SOLUTION.test(input));
     }
 }

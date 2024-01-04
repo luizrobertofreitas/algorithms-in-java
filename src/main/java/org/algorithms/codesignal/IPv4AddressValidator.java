@@ -2,8 +2,8 @@ package org.algorithms.codesignal;
 
 import java.util.function.Predicate;
 
-public final class IPV4AddressValidator {
-    private IPV4AddressValidator() {}
+public final class IPv4AddressValidator {
+    private IPv4AddressValidator() {}
 
     public static final Predicate<String> SOLUTION = input -> {
         String[] octets = input.split("\\.");
