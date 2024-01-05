@@ -1,6 +1,8 @@
 package org.algorithms.utils;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public final class ArrayCrazyOps {
 
@@ -15,5 +17,9 @@ public final class ArrayCrazyOps {
             newArrayIdx++;
         }
         return newArray;
+    }
+
+    public static Integer[] integerArrayConcat(Integer[] ... arrays) {
+        return Stream.of(arrays).flatMap(Stream::of).toArray(Integer[]::new);
     }
 }

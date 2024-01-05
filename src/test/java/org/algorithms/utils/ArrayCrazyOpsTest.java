@@ -18,4 +18,24 @@ class ArrayCrazyOpsTest {
         Assertions.assertEquals(array.length - 1, resultArray.length);
         Assertions.assertEquals(0, Arrays.stream(resultArray).filter(i -> i == 50).count());
     }
+
+    @Test
+    @Timeout(1)
+    void integerConcatenateTest() {
+        Integer[] first = {1,2,3,4,5};
+        Integer[] second = {6,7,8,9,10};
+        Integer[] third = {11,12,13,14,15};
+        Integer[] fourth = {16,17,18,19,20};
+        Integer[] fifth = {21,22,23,24,25};
+        Integer[] result = ArrayCrazyOps.integerArrayConcat(first, second, third, fourth, fifth);
+        System.out.println(Arrays.toString(result));
+        boolean isResultInTheRightSequence = true;
+        for (int i = 1, prev = result[0]; i < result.length;  prev = result[i], i++) {
+            if (result[i] < prev) {
+                isResultInTheRightSequence = false;
+                break;
+            }
+        }
+        Assertions.assertTrue(isResultInTheRightSequence);
+    }
 }

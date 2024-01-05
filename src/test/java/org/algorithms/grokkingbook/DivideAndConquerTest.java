@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.stream.Stream;
+
 class DivideAndConquerTest {
 
     @ParameterizedTest
@@ -17,11 +19,7 @@ class DivideAndConquerTest {
             "1,0,0,0,0,-5;-4"
     })
     void sumTest(String input, Integer expectedResult) {
-        String[] stringArray = input.split(",");
-        Integer[] array = new Integer[stringArray.length];
-        for (int i = 0; i < stringArray.length; i++) {
-            array[i] = Integer.valueOf(stringArray[i]);
-        }
+        Integer[] array = Stream.of(input.split(",")).map(Integer::valueOf).toArray(Integer[]::new);
         Assertions.assertEquals(expectedResult, DivideAndConquer.sum.applyAsInt(array));
     }
 }
