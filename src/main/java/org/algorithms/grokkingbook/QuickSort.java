@@ -5,6 +5,8 @@ import org.algorithms.utils.ArrayCrazyOps;
 import java.util.Arrays;
 import java.util.function.UnaryOperator;
 
+// O(n log n)
+// O(n) because of the loop inside the function and O(log n) due to the recursive call quantity, which we call as "call stack size"
 public final class QuickSort {
     private QuickSort() {}
 
