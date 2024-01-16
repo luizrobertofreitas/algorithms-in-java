@@ -22,4 +22,8 @@ public final class ArrayCrazyOps {
     public static Integer[] integerArrayConcat(Integer[] ... arrays) {
         return Stream.of(arrays).flatMap(Stream::of).toArray(Integer[]::new);
     }
+
+    public static Integer[] convertStringToIntegerArray(String input) {
+        return Stream.of(input.split(",")).map(Integer::valueOf).toArray(Integer[]::new);
+    }
 }

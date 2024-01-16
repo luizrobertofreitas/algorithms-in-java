@@ -3,8 +3,11 @@ package org.algorithms.utils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 class ArrayCrazyOpsTest {
 
@@ -37,5 +40,17 @@ class ArrayCrazyOpsTest {
             }
         }
         Assertions.assertTrue(isResultInTheRightSequence);
+    }
+
+    @ParameterizedTest
+    @CsvSource(delimiter = ';', value = {
+            "1,2,3,4,5,6,7,8,9,10;55",
+            "0,0,3,4,5,-1,201;212",
+    })
+    @Timeout(1)
+    void convertStringToIntegerArray(String input, Integer expectedResult) {
+        final Integer[] arr = ArrayCrazyOps.convertStringToIntegerArray(input);
+        final Integer sum = Stream.of(arr).reduce(0, Integer::sum);
+        Assertions.assertEquals(expectedResult, sum);
     }
 }

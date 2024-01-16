@@ -1,5 +1,6 @@
 package org.algorithms.grokkingbook;
 
+import org.algorithms.utils.ArrayCrazyOps;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -19,7 +20,7 @@ class DivideAndConquerTest {
             "1,0,0,0,0,-5;-4"
     })
     void sumTest(String input, Integer expectedResult) {
-        Integer[] array = Stream.of(input.split(",")).map(Integer::valueOf).toArray(Integer[]::new);
+        Integer[] array = ArrayCrazyOps.convertStringToIntegerArray(input);
         Assertions.assertEquals(expectedResult, DivideAndConquer.sum.applyAsInt(array));
     }
 }
