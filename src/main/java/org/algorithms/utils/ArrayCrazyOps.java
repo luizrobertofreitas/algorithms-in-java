@@ -26,4 +26,8 @@ public final class ArrayCrazyOps {
     public static Integer[] convertStringToIntegerArray(String input) {
         return Stream.of(input.split(",")).map(Integer::valueOf).toArray(Integer[]::new);
     }
+
+    public static Integer[] integerFlatten(Integer[][] matrix) {
+        return Arrays.stream(matrix).flatMap(Stream::of).toArray(Integer[]::new);
+    }
 }
