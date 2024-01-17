@@ -53,4 +53,20 @@ class ArrayCrazyOpsTest {
         final Integer sum = Stream.of(arr).reduce(0, Integer::sum);
         Assertions.assertEquals(expectedResult, sum);
     }
+
+    @ParameterizedTest
+    @CsvSource(delimiter = ';', value = {
+            "1,2,3;4,5,6;7,8,9"
+    })
+    @Timeout(1)
+    void integerFlattenTest(String input1, String input2, String input3) {
+        Integer[][] matrix = new Integer[][] {
+                ArrayCrazyOps.convertStringToIntegerArray(input1),
+                ArrayCrazyOps.convertStringToIntegerArray(input2),
+                ArrayCrazyOps.convertStringToIntegerArray(input3)
+        };
+        Integer[] result = ArrayCrazyOps.integerFlatten(matrix);
+        System.out.println("Flatten matrix: " + Arrays.toString(result));
+        Assertions.assertEquals(9, result.length);
+    }
 }
