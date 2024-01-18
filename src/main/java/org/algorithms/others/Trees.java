@@ -45,7 +45,8 @@ public final class Trees {
 
         public void print() {
             if (left != null) left.print();
-            System.out.println(value);
+            System.out.print(value + " ");
+            System.out.println();
             if (right != null) right.print();
         }
     }

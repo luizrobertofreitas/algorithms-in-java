@@ -17,11 +17,11 @@ class TreesTest {
     void generateTreeFromOrderedArrayTest(String input) {
         Integer[] arr = ArrayCrazyOps.convertStringToIntegerArray(input);
         Trees.Tree result = Trees.GENERATE_TREE_FROM_ORDERED_ARRAY.apply(arr);
-        result.print();
         Assertions.assertNotNull(result.value());
         Assertions.assertNotNull(result.left());
         Assertions.assertNotNull(result.right());
         Integer[] resultConvertedIntoArray = result.asArray();
+        System.out.println(Arrays.toString(resultConvertedIntoArray));
         Assertions.assertEquals(Arrays.toString(arr), Arrays.toString(resultConvertedIntoArray));
     }
 }
