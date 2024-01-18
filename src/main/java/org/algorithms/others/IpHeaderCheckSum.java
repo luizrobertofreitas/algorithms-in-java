@@ -6,6 +6,8 @@ import java.util.function.ToIntBiFunction;
 
 /*
     This guy helped a lot: https://www.youtube.com/watch?v=yHDyApknnU4
+
+    And this was fundamental: https://gist.github.com/david-hoze/0c7021434796997a4ca42d7731a7073a
 */
 public final class IpHeaderCheckSum {
     private IpHeaderCheckSum() {}
