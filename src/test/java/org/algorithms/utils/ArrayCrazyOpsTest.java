@@ -9,6 +9,9 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+import static org.algorithms.utils.ArrayCrazyOps.CONVERT_STRING_TO_INTEGER_ARRAY;
+import static org.algorithms.utils.ArrayCrazyOps.FLATTEN_INTEGER_MATRIX;
+
 class ArrayCrazyOpsTest {
 
     @Test
@@ -49,7 +52,7 @@ class ArrayCrazyOpsTest {
     })
     @Timeout(1)
     void convertStringToIntegerArray(String input, Integer expectedResult) {
-        final Integer[] arr = ArrayCrazyOps.convertStringToIntegerArray(input);
+        final Integer[] arr = CONVERT_STRING_TO_INTEGER_ARRAY.apply(input);
         final Integer sum = Stream.of(arr).reduce(0, Integer::sum);
         Assertions.assertEquals(expectedResult, sum);
     }
@@ -61,11 +64,11 @@ class ArrayCrazyOpsTest {
     @Timeout(1)
     void integerFlattenTest(String input1, String input2, String input3) {
         Integer[][] matrix = new Integer[][] {
-                ArrayCrazyOps.convertStringToIntegerArray(input1),
-                ArrayCrazyOps.convertStringToIntegerArray(input2),
-                ArrayCrazyOps.convertStringToIntegerArray(input3)
+                CONVERT_STRING_TO_INTEGER_ARRAY.apply(input1),
+                CONVERT_STRING_TO_INTEGER_ARRAY.apply(input2),
+                CONVERT_STRING_TO_INTEGER_ARRAY.apply(input3)
         };
-        Integer[] result = ArrayCrazyOps.integerFlatten(matrix);
+        Integer[] result = FLATTEN_INTEGER_MATRIX.apply(matrix);
         System.out.println("Flatten matrix: " + Arrays.toString(result));
         Assertions.assertEquals(9, result.length);
     }

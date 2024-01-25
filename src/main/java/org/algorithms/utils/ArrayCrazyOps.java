@@ -1,12 +1,25 @@
 package org.algorithms.utils;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.function.Function;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public final class ArrayCrazyOps {
 
     private ArrayCrazyOps() {}
+
+    public static final Function<int[][], Integer[][]> CONVERT_PRIMITIVE_INT_MATRIX_TO_INTEGER_MATRIX = matrix ->
+        Arrays.stream(matrix).map(arr -> IntStream.of(arr).boxed().toArray(Integer[]::new)).toArray(Integer[][]::new);
+
+    public static final Function<Integer[][], Integer[]> INTEGER_ARRAY_CONCAT = arrays ->
+            Stream.of(arrays).flatMap(Stream::of).toArray(Integer[]::new);
+
+    public static final Function<String, Integer[]> CONVERT_STRING_TO_INTEGER_ARRAY = str ->
+            Stream.of(str.split(",")).map(Integer::valueOf).toArray(Integer[]::new);
+
+    public static final Function<Integer[][], Integer[]> FLATTEN_INTEGER_MATRIX = matrix ->
+            Arrays.stream(matrix).flatMap(Stream::of).toArray(Integer[]::new);
 
     public static <A> A[] deleteFromArray(A[] array, Integer index) {
         final A[] newArray = Arrays.copyOf(array, array.length - 1);
@@ -21,13 +34,5 @@ public final class ArrayCrazyOps {
 
     public static Integer[] integerArrayConcat(Integer[] ... arrays) {
         return Stream.of(arrays).flatMap(Stream::of).toArray(Integer[]::new);
-    }
-
-    public static Integer[] convertStringToIntegerArray(String input) {
-        return Stream.of(input.split(",")).map(Integer::valueOf).toArray(Integer[]::new);
-    }
-
-    public static Integer[] integerFlatten(Integer[][] matrix) {
-        return Arrays.stream(matrix).flatMap(Stream::of).toArray(Integer[]::new);
     }
 }

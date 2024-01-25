@@ -1,11 +1,10 @@
 package org.algorithms.grokkingbook;
 
-import org.algorithms.utils.ArrayCrazyOps;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.stream.Stream;
+import static org.algorithms.utils.ArrayCrazyOps.CONVERT_STRING_TO_INTEGER_ARRAY;
 
 class DivideAndConquerTest {
 
@@ -20,7 +19,7 @@ class DivideAndConquerTest {
             "1,0,0,0,0,-5;-4"
     })
     void sumTest(String input, Integer expectedResult) {
-        Integer[] array = ArrayCrazyOps.convertStringToIntegerArray(input);
+        Integer[] array = CONVERT_STRING_TO_INTEGER_ARRAY.apply(input);
         Assertions.assertEquals(expectedResult, DivideAndConquer.sum.applyAsInt(array));
     }
 }

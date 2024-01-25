@@ -24,10 +24,12 @@ public final class QuickSort {
                 right[right.length - 1] = arr[i];
             }
         }
-        return ArrayCrazyOps.integerArrayConcat(
-                QuickSort.SOLUTION.apply(left),
-                new Integer[] {pivot},
-                QuickSort.SOLUTION.apply(right)
+        return ArrayCrazyOps.INTEGER_ARRAY_CONCAT.apply(
+                new Integer[][] {
+                        QuickSort.SOLUTION.apply(left),
+                        new Integer[]{pivot},
+                        QuickSort.SOLUTION.apply(right)
+                }
         );
     };
 }
