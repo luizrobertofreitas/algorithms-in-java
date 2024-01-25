@@ -1,12 +1,10 @@
 package org.algorithms.others;
 
-import org.algorithms.utils.ArrayCrazyOps;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
+
+import static org.algorithms.utils.ArrayCrazyOps.FLATTEN_INTEGER_MATRIX;
 
 public final class Trees {
     private Trees() {}
@@ -34,7 +32,7 @@ public final class Trees {
         public Integer[] asArray() {
             Integer[] leftArray = left != null ? left.asArray() : new Integer[0];
             Integer[] rightArray = right != null ? right.asArray() : new Integer[0];
-            return ArrayCrazyOps.integerFlatten(
+            return FLATTEN_INTEGER_MATRIX.apply(
                     Stream.of(
                         leftArray,
                         new Integer[]{value},

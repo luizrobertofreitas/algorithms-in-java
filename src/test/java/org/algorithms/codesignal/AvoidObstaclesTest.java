@@ -1,9 +1,10 @@
 package org.algorithms.codesignal;
 
-import org.algorithms.utils.ArrayCrazyOps;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import static org.algorithms.utils.ArrayCrazyOps.CONVERT_STRING_TO_INTEGER_ARRAY;
 
 class AvoidObstaclesTest {
     @ParameterizedTest
@@ -23,7 +24,7 @@ class AvoidObstaclesTest {
             "4,5;3",
     })
     void test(String input, Integer expectedResult) {
-        final Integer[] arr = ArrayCrazyOps.convertStringToIntegerArray(input);
+        final Integer[] arr = CONVERT_STRING_TO_INTEGER_ARRAY.apply(input);
         final Integer jumps = AvoidObstacles.SOLUTION.applyAsInt(arr);
         Assertions.assertEquals(expectedResult, jumps);
     }
