@@ -1,6 +1,7 @@
 package org.algorithms.utils;
 
 import java.util.Arrays;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -34,5 +35,13 @@ public final class ArrayCrazyOps {
 
     public static Integer[] integerArrayConcat(Integer[] ... arrays) {
         return Stream.of(arrays).flatMap(Stream::of).toArray(Integer[]::new);
+    }
+
+    public static <A> void printMatrix(A[][] matrix) {
+        Arrays.stream(matrix).forEach(arr -> System.out.println(Arrays.toString(arr)));
+    }
+
+    public static void printIntMatrix(int[][] matrix) {
+        Arrays.stream(matrix).forEach(arr -> System.out.println(Arrays.toString(arr)));
     }
 }
