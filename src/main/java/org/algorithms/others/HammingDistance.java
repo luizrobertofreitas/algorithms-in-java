@@ -2,6 +2,9 @@ package org.algorithms.others;
 
 import java.util.function.BiFunction;
 
+/*
+    https://en.wikipedia.org/wiki/Hamming_distance
+*/
 public final class HammingDistance {
 
     private HammingDistance() {}
