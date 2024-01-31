@@ -1,4 +1,4 @@
-package org.algorithms.others;
+package org.algorithms.others.distance;
 
 import java.util.function.BiFunction;
 

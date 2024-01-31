@@ -1,6 +1,6 @@
-package org.algorithms.other;
+package org.algorithms.other.distance;
 
-import org.algorithms.others.HammingDistance;
+import org.algorithms.others.distance.HammingDistance;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
