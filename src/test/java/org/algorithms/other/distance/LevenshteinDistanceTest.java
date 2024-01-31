@@ -1,4 +1,4 @@
-package org.algorithms.other;
+package org.algorithms.other.distance;
 
 public class LevenshteinDistanceTest {
 }

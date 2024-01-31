@@ -1,4 +1,4 @@
-package org.algorithms.other.distance;
+package org.algorithms.other;
 
 import org.algorithms.others.ParenthesisMatch;
 import org.junit.jupiter.api.Assertions;
