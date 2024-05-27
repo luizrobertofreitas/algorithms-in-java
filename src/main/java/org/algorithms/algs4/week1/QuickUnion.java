@@ -28,10 +28,9 @@ public class QuickUnion extends UnionFind {
         this.arr[firstRoot] = secondRoot;
     }
 
-    protected int findRoot(int number) {
-        int root = this.arr[number];
-        while (root != this.arr[root])
-            root = this.arr[root];
-        return root;
+    protected int findRoot(int i) {
+        while (i != this.arr[i])
+            i = this.arr[i];
+        return i;
     }
 }
