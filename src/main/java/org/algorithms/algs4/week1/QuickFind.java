@@ -15,15 +15,16 @@ public class QuickFind extends UnionFind {
     @Override
     public boolean connected(int first, int second) {
         validate(first, second);
-        return this.arr[first] == this.arr[second];
+        return arr[first] == arr[second];
     }
 
     @Override
     public void union(int first, int second) {
         validate(first, second);
-        if (!this.connected(first, second)) {
-            for (int i = 0; i < this.arr.length; i++)
-                if (this.arr[i] == first) this.arr[i] = this.arr[second];
+        int firstValue = arr[first];
+        int secondValue = arr[second];
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == firstValue) arr[i] = secondValue;
         }
     }
 }

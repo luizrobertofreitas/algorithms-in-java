@@ -26,6 +26,14 @@ abstract class UnionFind {
     abstract boolean connected(int first, int second);
     abstract void union(int first, int second);
 
+    public int findLargestConnectedTo(int i) {
+        int largest = i;
+        for (int j = 0; j < arr.length; j++) {
+            if (connected(i, j) && j > i) largest = j;
+        }
+        return largest;
+    }
+
     public void validate(int ... numbers) {
         if (Arrays.stream(numbers).anyMatch(n -> n > this.arr.length - 1))
             throw new IllegalArgumentException("There are some number in : " +
