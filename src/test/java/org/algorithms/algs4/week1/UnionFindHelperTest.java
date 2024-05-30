@@ -13,13 +13,13 @@ abstract class UnionFindHelperTest {
         assertTrue(uf.connected(3, 4));
         uf.union(4, 9);
         assertTrue(uf.connected(3, 9));
-        uf.union(9, 1);
+        uf.union(1, 9);
         assertTrue(uf.connected(8, 9));
         assertTrue(uf.connected(4, 8));
         assertTrue(uf.connected(3, 1));
         assertTrue(uf.connected(1, 4));
-        uf.union(10, 1);
-        uf.union(20,10);
+        uf.union(1, 10);
+        uf.union(10,20);
         uf.union(4, 25);
         assertTrue(uf.connected(20, 1));
         assertTrue(uf.connected(4, 10));
