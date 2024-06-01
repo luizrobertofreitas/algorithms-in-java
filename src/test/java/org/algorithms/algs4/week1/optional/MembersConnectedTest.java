@@ -41,7 +41,11 @@ class MembersConnectedTest {
 
     @Test
     void test1000Members() {
-        List<String[]> connections = FileUtils.getCSVLinesFromFileInTestResourcesFolder( ",", "algs4","members_connected.csv");
-        connections.stream().map(Arrays::toString).forEach(System.out::println);
+        List<String[]> connectionsFromFile = FileUtils.getCSVLinesFromFileInTestResourcesFolder( ",", "algs4","members_connected.csv");
+        final List<MembersConnected.Connection> connections = connectionsFromFile.stream()
+            .map(arr -> new MembersConnected.Connection(arr[0], arr[1], Integer.parseInt(arr[2])))
+            .toList();
+        final MembersConnected mc = new MembersConnected(connections);
+        assertEquals(1000, mc.allConnectedAtSequence());
     }
 }

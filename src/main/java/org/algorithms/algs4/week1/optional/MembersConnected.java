@@ -3,6 +3,7 @@ package org.algorithms.algs4.week1.optional;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class MembersConnected {
@@ -13,9 +14,8 @@ public class MembersConnected {
     private final int connectedAtSequence;
 
     public MembersConnected(List<Connection> connections) {
-        this.members = connections.stream().map(c -> c.friend1).collect(Collectors.toSet()).toArray(String[]::new);
-        this.connections = new int[this.members.length];
-        for (int i = 0; i < this.connections.length; i++) this.connections[i] = i;
+        this.members = extractAllUniqueMembers(connections);
+        this.connections = initConnections(this.members);
         this.connectedAtSequence = makeConnections(connections);
     }
 
@@ -30,6 +30,18 @@ public class MembersConnected {
 
     public String toStringConnections() {
         return Arrays.toString(connections);
+    }
+
+    private String[] extractAllUniqueMembers(List<Connection> connections) {
+        Set<String> ms = connections.stream().map(Connection::friend1).collect(Collectors.toSet());
+        ms.addAll(connections.stream().map(Connection::friend2).collect(Collectors.toSet()));
+        return ms.toArray(String[]::new);
+    }
+
+    private int[] initConnections(String[] ms) {
+        int[] conn = new int[ms.length];
+        for (int i = 0; i < conn.length; i++) conn[i] = i;
+        return conn;
     }
 
     private int makeConnections(List<Connection> connections) {
