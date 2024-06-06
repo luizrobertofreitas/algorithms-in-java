@@ -1,10 +1,9 @@
 package org.algorithms.algs4.week1.assignment;
 
+import edu.princeton.cs.algs4.StdRandom;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,11 +30,6 @@ class PercolationTest {
         p.open(2, 3);
         p.open(3, 3);
         p.open(3, 2);
-        for (int i = 0; i < p.sitesStates.length - 20; i += 20) {
-            System.out.println(
-                    Arrays.toString(Arrays.copyOfRange(p.sitesStates, i, i + 20))
-            );
-        }
         assertTrue(p.isFull(5, 5));
         assertTrue(p.isFull(3,2));
         p.open(2,1);
@@ -107,5 +101,57 @@ class PercolationTest {
         assertThrows(IllegalArgumentException.class, () -> {
             p.open(row, col);
         });
+    }
+
+    @Test
+    void openSitesTest() {
+        final Percolation p = new Percolation(20);
+        for (int i = 1; i <= 20; p.open(i, 5), i++);
+        p.open(2, 4);
+        p.open(2, 3);
+        p.open(3, 3);
+        p.open(3, 2);
+        p.open(2,1);
+        p.open(2,2);
+        p.open(1,1);
+        for (int i = 4; i <= 20; i++) {
+            p.open(i, 2);
+        }
+        assertEquals(44, p.numberOfOpenSites());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+        "3",
+        "7",
+        "13",
+        "17",
+        "50",
+        "120",
+        "250",
+        "500",
+        "1000",
+        "5500",
+    })
+    void openUntilItPercolates(int n) {
+        final Percolation p = new Percolation(n);
+        int randomCol = 1, randomRow = 1;
+        int nOfTrials = 0;
+        final int expectedThreshold = (int) (n * n * 0.6);
+        while(!p.percolates()) {
+            final int row = StdRandom.uniformInt(1, n + 1);
+            final int col = StdRandom.uniformInt(1, n + 1);
+            if (row == 2) {
+                randomRow = row;
+                randomCol = col;
+            }
+            p.open(row, col);
+            nOfTrials++;
+        }
+
+        assertTrue(p.percolates());
+        assertTrue(p.isFull(randomRow, randomCol));
+        System.out.println("Expected Threshold 60% = " + expectedThreshold +
+            ", Number of tries = " + nOfTrials);
     }
 }

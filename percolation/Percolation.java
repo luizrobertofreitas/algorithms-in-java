@@ -2,7 +2,8 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
     private final int n;
-    private final int[] sitesStates;
+    private final boolean[] sitesStates;
+    private int numOfOpenSites = 0;
     private final WeightedQuickUnionUF wqu;
 
     // creates n-by-n grid, with all sites initially blocked
@@ -10,30 +11,30 @@ public class Percolation {
         this.n = n;
         final int totalSize = n * n;
         wqu = new WeightedQuickUnionUF(totalSize);
-        sitesStates = new int[totalSize];
+        sitesStates = new boolean[totalSize];
     }
 
     // opens the site (row, col) if it is not open already
     public void open(int row, int col) {
         validates(row, col);
-        if (isOpen(row, col)) return;
         int i = getIndex(row, col);
-        sitesStates[i] = 1;
+        sitesStates[i] = true;
+        numOfOpenSites++;
         //up
-        union(i, getIndex(row - 1, col));
+        union(i, i - n);
         //down
-        union(i, getIndex(row + 1, col));
+        union(i, i + n);
         //left
-        union(i, getIndex(row, col) - 1);
+        union(i, i - 1);
         //right
-        union(i, getIndex(row, col + 1));
+        union(i, i + 1);
     }
 
     // is the site (row, col) open?
     public boolean isOpen(int row, int col) {
         validates(row, col);
         int i = getIndex(row, col);
-        return sitesStates[i] == 1;
+        return sitesStates[i];
     }
 
     // is the site (row, col) full? is this connected to another site that reaches the other side?
@@ -55,15 +56,12 @@ public class Percolation {
                 break;
             }
         }
-
         return connectedBottomUp[0] && connectedBottomUp[1];
     }
 
     // returns the number of open sites
     public int numberOfOpenSites() {
-        int sum = 0;
-        for (int i = 0; i < sitesStates.length; sum += sitesStates[i], i++);
-        return sum;
+        return numOfOpenSites;
     }
 
     // does the system percolate?
@@ -82,7 +80,7 @@ public class Percolation {
     }
 
     private boolean isOpenByIndex(int i) {
-        return sitesStates[i] == 1;
+        return sitesStates[i];
     }
 
     private void union(int first, int second) {

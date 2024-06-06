@@ -2,34 +2,9 @@ package org.algorithms.algs4.week1.assignment;
 
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
-// https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php
-
-// https://www.coursera.org/learn/algorithms-part1/discussions/forums/8i0LoDcjEeaibQryEY-vTQ/threads/bhKmPr1gEe6vuA43LArTvQ
-
-/*
-[false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-[false, false, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-[false, true, true, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-[false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-[false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-[false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-[false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-[false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-[false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-[false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-[false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-[false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-[false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-[false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-[false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-[false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-[false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-[false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-[false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-* */
 public class Percolation {
     private final int n;
-    public final boolean[] sitesStates;
+    private final boolean[] sitesStates;
 
     private int numOfOpenSites = 0;
 
@@ -37,6 +12,7 @@ public class Percolation {
 
     // creates n-by-n grid, with all sites initially blocked
     public Percolation(int n) {
+        if (n < 1) throw new IllegalArgumentException("n can't be less than 1");
         this.n = n;
         final int totalSize = n * n;
         wqu = new WeightedQuickUnionUF(totalSize);
@@ -69,7 +45,7 @@ public class Percolation {
     // is the site (row, col) full? is this connected to another site that reaches the other side?
     public boolean isFull(int row, int col) {
         validates(row, col);
-        if (isOpen(row, col)) return false;
+        if (!isOpen(row, col)) return false;
         int idx = getIndex(row, col);
         boolean[] connectedBottomUp = new boolean[2];
         for (int i = 0; i < n; i++) {
@@ -85,7 +61,6 @@ public class Percolation {
                 break;
             }
         }
-
         return connectedBottomUp[0] && connectedBottomUp[1];
     }
 
