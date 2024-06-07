@@ -5,10 +5,8 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 public class Percolation {
     private final int n;
     private final boolean[] sitesStates;
-
-    private int numOfOpenSites = 0;
-
     private final WeightedQuickUnionUF wqu;
+    private int numOfOpenSites = 0;
 
     // creates n-by-n grid, with all sites initially blocked
     public Percolation(int n) {
@@ -25,13 +23,13 @@ public class Percolation {
         int i = getIndex(row, col);
         sitesStates[i] = true;
         numOfOpenSites++;
-        //up
+        // up
         union(i, i - n);
-        //down
+        // down
         union(i, i + n);
-        //left
+        // left
         union(i, i - 1);
-        //right
+        // right
         union(i, i + 1);
     }
 
@@ -47,21 +45,13 @@ public class Percolation {
         validates(row, col);
         if (!isOpen(row, col)) return false;
         int idx = getIndex(row, col);
-        boolean[] connectedBottomUp = new boolean[2];
         for (int i = 0; i < n; i++) {
-            if (isOpenByIndex(i) && connected(idx, i)) {
-                connectedBottomUp[0] = true;
-                break;
+            if (isOpenByIndex(i) && isConnected(idx, i)) {
+                return true;
             }
         }
 
-        for (int i = sitesStates.length - n; i < sitesStates.length; i++) {
-            if (isOpenByIndex(i) && connected(idx, i)) {
-                connectedBottomUp[1] = true;
-                break;
-            }
-        }
-        return connectedBottomUp[0] && connectedBottomUp[1];
+        return false;
     }
 
     // returns the number of open sites
@@ -74,7 +64,7 @@ public class Percolation {
         for (int i = 0; i < n; i++) {
             if (!isOpenByIndex(i)) continue;
             for (int j = sitesStates.length - n; j < sitesStates.length; j++) {
-                if (isOpenByIndex(j) && connected(i, j)) return true;
+                if (isOpenByIndex(j) && isConnected(i, j)) return true;
             }
         }
         return false;
@@ -89,12 +79,14 @@ public class Percolation {
     }
 
     private void union(int first, int second) {
-        if (second > -1 && second < sitesStates.length && isOpenByIndex(second)) {
-            wqu.union(first, second);
-        }
+        if (second < 0 || second >= sitesStates.length || !isOpenByIndex(second)) return;
+        int firstRoot = wqu.find(first);
+        int secondRoot = wqu.find(second);
+        if (firstRoot == secondRoot) return;
+        wqu.union(first, second);
     }
 
-    private boolean connected(int first, int second) {
+    private boolean isConnected(int first, int second) {
         return wqu.find(first) == wqu.find(second);
     }
 

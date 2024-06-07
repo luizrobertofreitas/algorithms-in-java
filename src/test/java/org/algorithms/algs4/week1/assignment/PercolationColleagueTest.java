@@ -7,40 +7,61 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PercolationTest {
+class PercolationColleagueTest {
     @Test
     void percolatesTest() {
-        final Percolation p = new Percolation(20);
+        final PercolationColleague p = new PercolationColleague(20);
         for (int i = 1; i <= 20; p.open(i, 5), i++);
         assertTrue(p.percolates());
     }
 
     @Test
     void doesNotPercolatesTest() {
-        final Percolation p = new Percolation(20);
+        final PercolationColleague p = new PercolationColleague(20);
         for (int i = 1; i < 20; p.open(i, 5), i++);
         assertFalse(p.percolates());
     }
 
+    @Test
+    void isFullTest() {
+        final PercolationColleague p = new PercolationColleague(20);
+        for (int i = 1; i <= 20; p.open(i, 5), i++);
+        p.open(2, 4);
+        p.open(2, 3);
+        p.open(3, 3);
+        p.open(3, 2);
+        assertTrue(p.isFull(5, 5));
+        assertTrue(p.isFull(3,2));
+        p.open(2,1);
+        p.open(2,2);
+        assertTrue(p.isFull(2,1));
+        p.open(1,1);
+        assertTrue(p.isFull(1,1));
+        for (int i = 4; i <= 20; i++) {
+            p.open(i, 2);
+        }
+        assertTrue(p.isFull(19, 2));
+        assertTrue(p.isFull(17, 2));
+        assertTrue(p.isFull(13, 2));
+    }
+
     @ParameterizedTest
     @CsvSource({
-            "20,1,1,true",
-            "20,1,19,true",
-            "20,1,20,true",
-            "20,2,2,false",
-            "20,18,18,false",
-            "20,2,1,false",
-            "20,10,10,false",
-            "20,1,15,true",
-            "20,9,8,false",
-            "20,19,1,false",
-            "20,6,10,false",
-            "20,20,20,false",
+            "20,1,1",
+            "20,1,19",
+            "20,2,2",
+            "20,18,18",
+            "20,2,1",
+            "20,10,10",
+            "20,9,8",
+            "20,19,1",
+            "20,6,10",
+            "20,20,20",
     })
-    void isFullTest(int n, int row, int col, boolean expected) {
-        final Percolation p = new Percolation(n);
+    void isNotFullTest(int n, int row, int col) {
+        final PercolationColleague p = new PercolationColleague(n);
         p.open(row, col);
-        assertEquals(expected, p.isFull(row, col));
+        assertFalse(p.isFull(row, col));
     }
 
     @ParameterizedTest
@@ -57,7 +78,7 @@ class PercolationTest {
             "20,20,20",
     })
     void isOpenTest(int n, int row, int col) {
-        final Percolation p = new Percolation(n);
+        final PercolationColleague p = new PercolationColleague(n);
         p.open(row, col);
         assertTrue(p.isOpen(row, col));
     }
@@ -76,7 +97,7 @@ class PercolationTest {
             "10000,10001,20",
     })
     void invalidRowAndColumnOnOpen(int n, int row, int col) {
-        final Percolation p = new Percolation(n);
+        final PercolationColleague p = new PercolationColleague(n);
         assertThrows(IllegalArgumentException.class, () -> {
             p.open(row, col);
         });
@@ -84,7 +105,7 @@ class PercolationTest {
 
     @Test
     void openSitesTest() {
-        final Percolation p = new Percolation(20);
+        final PercolationColleague p = new PercolationColleague(20);
         for (int i = 1; i <= 20; p.open(i, 5), i++);
         p.open(2, 4);
         p.open(2, 3);
@@ -110,7 +131,7 @@ class PercolationTest {
         "250",
     })
     void openUntilItPercolates(int n) {
-        final Percolation p = new Percolation(n);
+        final PercolationColleague p = new PercolationColleague(n);
         int randomCol = 1, randomRow = 1;
         int nOfTrials = 0;
         final int expectedThreshold = (int) (n * n * 0.6);
