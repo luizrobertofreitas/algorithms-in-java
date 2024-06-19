@@ -45,7 +45,7 @@ public class PercolationColleague {
         if (row < n && (sitesState[idx+n] & OPEN) != 0) union(idx, idx+n); // below
 
         openSites++;
-        systemPercolates = sitesState[UF.find(idx)] == CONDUCTOR;
+        if (sitesState[UF.find(idx)] == CONDUCTOR) systemPercolates = sitesState[UF.find(idx)] == CONDUCTOR;
     }
 
     private void union(int p, int q) {
@@ -58,7 +58,9 @@ public class PercolationColleague {
         sitesState[firstRoot] |= sitesState[secondRoot];
         sitesState[secondRoot] |= sitesState[firstRoot];
 
-        systemPercolates = sitesState[firstRoot] == CONDUCTOR;
+        firstRoot = UF.find(p);
+
+        if (sitesState[firstRoot] == CONDUCTOR) systemPercolates = sitesState[firstRoot] == CONDUCTOR;
         System.out.println("percolates: " + systemPercolates);
     }
 

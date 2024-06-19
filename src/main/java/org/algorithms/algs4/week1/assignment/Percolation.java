@@ -3,10 +3,18 @@ package org.algorithms.algs4.week1.assignment;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
+
+    private static final int OPEN = 4;
+    private static final int TOP = 2;
+    private static final int BOTTOM = 1;
+    private static final int CONNECTED = 7;
+    private static final int TOP_CONNECTED = TOP | OPEN;
+
     private final int n;
-    private final boolean[] sitesStates;
+    private final int[] sitesStates;
     private final WeightedQuickUnionUF wqu;
     private int numOfOpenSites = 0;
+    private boolean percolates = false;
 
     // creates n-by-n grid, with all sites initially blocked
     public Percolation(int n) {
@@ -14,44 +22,42 @@ public class Percolation {
         this.n = n;
         final int totalSize = n * n;
         wqu = new WeightedQuickUnionUF(totalSize);
-        sitesStates = new boolean[totalSize];
+        sitesStates = new int[totalSize];
     }
 
     // opens the site (row, col) if it is not open already
     public void open(int row, int col) {
         validates(row, col);
+        if (isOpen(row, col)) return;
         int i = getIndex(row, col);
-        sitesStates[i] = true;
+        if (n > 1) sitesStates[i] |= OPEN;
+        else sitesStates[i] |= CONNECTED;
+        if (row == 1) sitesStates[i] |= TOP;
+        if (row == n) sitesStates[i] |= BOTTOM;
         numOfOpenSites++;
         // up
-        union(i, i - n);
-        // down
-        union(i, i + n);
-        // left
-        union(i, i - 1);
+        if (row > 1) union(i, i - n);
         // right
-        union(i, i + 1);
+        if (col < n) union(i, i + 1);
+        // left
+        if (col > 1) union(i, i - 1);
+        // down
+        if (row < n) union(i, i + n);
+
+        if (sitesStates[i] == CONNECTED) percolates = true;
     }
 
     // is the site (row, col) open?
     public boolean isOpen(int row, int col) {
         validates(row, col);
-        int i = getIndex(row, col);
-        return sitesStates[i];
+        return isOpenByIndex(getIndex(row, col));
     }
 
     // is the site (row, col) full? is this connected to another site that reaches the other side?
     public boolean isFull(int row, int col) {
         validates(row, col);
-        if (!isOpen(row, col)) return false;
-        int idx = getIndex(row, col);
-        for (int i = 0; i < n; i++) {
-            if (isOpenByIndex(i) && isConnected(idx, i)) {
-                return true;
-            }
-        }
-
-        return false;
+        final int root = wqu.find(getIndex(row, col));
+        return sitesStates[root] == TOP_CONNECTED || sitesStates[root] == CONNECTED;
     }
 
     // returns the number of open sites
@@ -61,13 +67,7 @@ public class Percolation {
 
     // does the system percolate?
     public boolean percolates() {
-        for (int i = 0; i < n; i++) {
-            if (!isOpenByIndex(i)) continue;
-            for (int j = sitesStates.length - n; j < sitesStates.length; j++) {
-                if (isOpenByIndex(j) && isConnected(i, j)) return true;
-            }
-        }
-        return false;
+        return percolates;
     }
 
     private int getIndex(int row, int col) {
@@ -75,7 +75,7 @@ public class Percolation {
     }
 
     private boolean isOpenByIndex(int i) {
-        return sitesStates[i];
+        return sitesStates[i] != 0;
     }
 
     private void union(int first, int second) {
@@ -83,11 +83,15 @@ public class Percolation {
         int firstRoot = wqu.find(first);
         int secondRoot = wqu.find(second);
         if (firstRoot == secondRoot) return;
-        wqu.union(first, second);
-    }
 
-    private boolean isConnected(int first, int second) {
-        return wqu.find(first) == wqu.find(second);
+        final int stateBeforeUnion = sitesStates[firstRoot] | sitesStates[secondRoot];
+
+        wqu.union(firstRoot, secondRoot);
+
+        final int mainRoot = wqu.find(firstRoot);
+        sitesStates[mainRoot] |= stateBeforeUnion; // should be before the union
+
+        if (sitesStates[mainRoot] == CONNECTED) percolates = sitesStates[mainRoot] == CONNECTED;
     }
 
     private void validates(int row, int col) {

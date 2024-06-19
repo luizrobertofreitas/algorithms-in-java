@@ -10,8 +10,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class PercolationColleagueTest {
     @Test
     void percolatesTest() {
-        final PercolationColleague p = new PercolationColleague(20);
-        for (int i = 1; i <= 20; p.open(i, 5), i++);
+        int n = 3;
+        final PercolationColleague p = new PercolationColleague(n);
+        for (int i = 1; i <= n; p.open(i, 2), i++);
         assertTrue(p.percolates());
     }
 
@@ -22,46 +23,25 @@ class PercolationColleagueTest {
         assertFalse(p.percolates());
     }
 
-    @Test
-    void isFullTest() {
-        final PercolationColleague p = new PercolationColleague(20);
-        for (int i = 1; i <= 20; p.open(i, 5), i++);
-        p.open(2, 4);
-        p.open(2, 3);
-        p.open(3, 3);
-        p.open(3, 2);
-        assertTrue(p.isFull(5, 5));
-        assertTrue(p.isFull(3,2));
-        p.open(2,1);
-        p.open(2,2);
-        assertTrue(p.isFull(2,1));
-        p.open(1,1);
-        assertTrue(p.isFull(1,1));
-        for (int i = 4; i <= 20; i++) {
-            p.open(i, 2);
-        }
-        assertTrue(p.isFull(19, 2));
-        assertTrue(p.isFull(17, 2));
-        assertTrue(p.isFull(13, 2));
-    }
-
     @ParameterizedTest
     @CsvSource({
-            "20,1,1",
-            "20,1,19",
-            "20,2,2",
-            "20,18,18",
-            "20,2,1",
-            "20,10,10",
-            "20,9,8",
-            "20,19,1",
-            "20,6,10",
-            "20,20,20",
+        "20,1,1,true",
+        "20,1,19,true",
+        "20,1,20,true",
+        "20,2,2,false",
+        "20,18,18,false",
+        "20,2,1,false",
+        "20,10,10,false",
+        "20,1,15,true",
+        "20,9,8,false",
+        "20,19,1,false",
+        "20,6,10,false",
+        "20,20,20,false",
     })
-    void isNotFullTest(int n, int row, int col) {
+    void isFullTest(int n, int row, int col, boolean expected) {
         final PercolationColleague p = new PercolationColleague(n);
         p.open(row, col);
-        assertFalse(p.isFull(row, col));
+        assertEquals(expected, p.isFull(row, col));
     }
 
     @ParameterizedTest

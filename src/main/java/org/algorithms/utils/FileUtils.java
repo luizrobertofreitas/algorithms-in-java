@@ -23,4 +23,12 @@ public final class FileUtils {
     public static List<String[]> getCSVLinesFromFileInTestResourcesFolder(String csvDelimiter, String ... csvFilePath) {
         return getCSVLines(csvDelimiter, TEST_RESOURCES_FOLDER_PATH, csvFilePath);
     }
+
+    public static List<String> getStreamOfLinesFromFile(final String filePath) {
+        try (final Stream<String> lines = Files.lines(Paths.get(TEST_RESOURCES_FOLDER_PATH, filePath))) {
+            return lines.toList();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 }

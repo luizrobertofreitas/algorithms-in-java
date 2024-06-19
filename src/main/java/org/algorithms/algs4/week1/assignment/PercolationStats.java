@@ -6,6 +6,9 @@ import edu.princeton.cs.algs4.StdStats;
 public class PercolationStats {
     private static final double CONSTANT_1_96 = 1.96;
 
+    // trial array of arrays
+
+
     private final double[] trials;
 
     // perform independent trials on an n-by-n grid
@@ -13,19 +16,15 @@ public class PercolationStats {
         if (n <= 0 || trials <= 0) throw new IllegalArgumentException();
         this.trials = new double[trials];
         for (int i = 0; i < this.trials.length; i++) {
-            double count = 0;
             final Percolation p = new Percolation(n);
             while (!p.percolates()) {
-                int row = StdRandom.uniformInt(n) + 1;
-                int col = StdRandom.uniformInt(n) + 1;
-                row = row == 0 ? 1 : row;
-                col = col == 0 ? 1 : col;
-                if (p.isOpen(row, col)) {
+                int row = StdRandom.uniformInt(1, n + 1);
+                int col = StdRandom.uniformInt(1, n + 1);
+                if (!p.isOpen(row, col)) {
                     p.open(row, col);
-                    count++;
                 }
             }
-            this.trials[i] = count / (n * n);
+            this.trials[i] = ((double) p.numberOfOpenSites()) / (n * n);
         }
 
     }
@@ -60,3 +59,4 @@ public class PercolationStats {
         System.out.println("95% confidence interval = [" + ps.confidenceLo() + ", " + ps.confidenceHi() + "]");
     }
 }
+
