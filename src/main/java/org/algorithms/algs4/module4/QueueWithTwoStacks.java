@@ -1,8 +1,8 @@
 package org.algorithms.algs4.module4;
 
 public class QueueWithTwoStacks<E> {
-    private final SimpleStack<E> s1 = new SimpleStack<>();
-    private final SimpleStack<E> s2 = new SimpleStack<>();
+    private final DynamicSizedStack<E> s1 = new DynamicSizedStack<>();
+    private final DynamicSizedStack<E> s2 = new DynamicSizedStack<>();
 
     public void enqueue(E e) {
         while (!s1.isEmpty()) s2.push(s1.pop());

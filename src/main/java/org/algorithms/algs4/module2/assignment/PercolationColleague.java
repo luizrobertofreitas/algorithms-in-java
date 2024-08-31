@@ -61,7 +61,6 @@ public class PercolationColleague {
         firstRoot = UF.find(p);
 
         if (sitesState[firstRoot] == CONDUCTOR) systemPercolates = sitesState[firstRoot] == CONDUCTOR;
-        System.out.println("percolates: " + systemPercolates);
     }
 
     public boolean isOpen(int row, int col) {

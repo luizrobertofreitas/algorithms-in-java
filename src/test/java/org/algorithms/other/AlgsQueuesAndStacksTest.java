@@ -1,7 +1,7 @@
 package org.algorithms.other;
 
 import org.algorithms.algs4.module4.QueueWithTwoStacks;
-import org.algorithms.algs4.module4.SimpleStack;
+import org.algorithms.algs4.module4.DynamicSizedStack;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +27,7 @@ class AlgsQueuesAndStacksTest {
 
     @Test
     void stackWithMaximumOperationsTest() {
-        final SimpleStack<Integer> swmo = new SimpleStack<>();
+        final DynamicSizedStack<Integer> swmo = new DynamicSizedStack<>();
         swmo.push(1);
         swmo.push(2);
         swmo.push(3);
