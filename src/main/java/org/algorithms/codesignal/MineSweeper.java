@@ -14,9 +14,7 @@ public final class MineSweeper {
         for (int r = 0; r < matrix.length; r++) {
             for (int c = 0; c < matrix[r].length; c++) {
                 if (matrix[r][c]) {
-                     System.out.println("Bomb at: (r="+r+", c="+c+")");
-                     System.out.println("Updating neighbors");
-                    if (r == 0) {
+                     if (r == 0) {
                         result[r+1][c]++;
                         if (c == 0) {
                             result[r][c+1]++;
