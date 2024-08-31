@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.List;
 
-public class DynamicSizedStack<E> {
+public class DynamicSizedStack<E> implements BasicStack<E> {
     private final List<E> arr;
     private int i = 0;
 
@@ -19,7 +19,6 @@ public class DynamicSizedStack<E> {
         } else {
             arr.set(i++, e);
         }
-
     }
 
     public E pop() {

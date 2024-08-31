@@ -5,11 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class DynamicSizedStackTest {
-
+class FixedSizedStackTest {
     @Test
     void testPeek() {
-        final DynamicSizedStack<Integer> dss = new DynamicSizedStack<>();
+        final FixedSizedStack<Integer> dss = new FixedSizedStack<>(Integer.class, 10);
         Assertions.assertTrue(dss.isEmpty());
         dss.push(4);
         Assertions.assertEquals(4, dss.peek());
@@ -18,7 +17,7 @@ class DynamicSizedStackTest {
 
     @Test
     void testPushesAndPops() {
-        final DynamicSizedStack<Integer> dss = new DynamicSizedStack<>();
+        final FixedSizedStack<Integer> dss = new FixedSizedStack<>(Integer.class, 10);
         Assertions.assertTrue(dss.isEmpty());
         dss.push(1);
         dss.push(2);
@@ -47,7 +46,7 @@ class DynamicSizedStackTest {
             "100000000",
     })
     void massivePushesPeeksAndPops(Integer size) {
-        final DynamicSizedStack<Integer> dss = new DynamicSizedStack<>();
+        final FixedSizedStack<Integer> dss = new FixedSizedStack<>(Integer.class, size);
         Assertions.assertTrue(dss.isEmpty());
         for (int i = 1; i < size; i++) {
             dss.push(i);
