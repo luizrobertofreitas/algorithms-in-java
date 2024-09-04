@@ -1,7 +1,5 @@
 package org.algorithms.algs4.module4.assignment;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -29,7 +27,6 @@ public class RandomizedQueue<T> implements Iterable<T> {
         return null;
     }
 
-    @NotNull
     @Override
     public Iterator<T> iterator() {
         return new RandomizedQueueIterator<>(this);

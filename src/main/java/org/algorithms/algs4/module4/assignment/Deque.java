@@ -1,7 +1,5 @@
 package org.algorithms.algs4.module4.assignment;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -73,7 +71,6 @@ public class Deque<T> implements Iterable<T> {
         return current;
     }
 
-    @NotNull
     @Override
     public Iterator<T> iterator() {
         return new DequeIterator<>(this);
