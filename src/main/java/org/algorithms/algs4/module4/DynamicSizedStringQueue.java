@@ -2,33 +2,33 @@ package org.algorithms.algs4.module4;
 
 import java.util.NoSuchElementException;
 
-public class DynamicSizedIntegerQueue {
+public class DynamicSizedStringQueue {
 
     private static final int SIZE_DOWN_THRESHOLD = 25;
     private static final int REBALANCE_THRESHOLD = 50;
-    private Integer[] arr = new Integer[1];
+    private String[] arr = new String[1];
     private int head = 0;
     private int tail = 0;
 
     private int size = 0;
 
-    public void push(Integer i) {
-        if (i == null) throw new IllegalArgumentException();
-        arr[tail++] = i;
+    public void push(String s) {
+        if (s == null) throw new IllegalArgumentException();
+        arr[tail++] = s;
         size++;
         sizeUp();
     }
 
-    public Integer pop() {
+    public String pop() {
         if (size < 1) throw new NoSuchElementException();
-        Integer r = arr[head];
+        String r = arr[head];
         arr[head--] = null;
         size--;
         sizeDown();
         return r;
     }
 
-    public Integer peek() {
+    public String peek() {
         if (size < 1) throw new NoSuchElementException();
         return arr[head];
     }
@@ -45,14 +45,14 @@ public class DynamicSizedIntegerQueue {
         return tail;
     }
 
-    public Integer head() {
+    public String head() {
         if (size == 0) throw new NoSuchElementException();
         return arr[head];
     }
 
-    public Integer tail() {
+    public String tail() {
         if (size == 0) throw new NoSuchElementException();
-        return arr[tail];
+        return arr[tail - 1];
     }
 
     private void sizeDown() {
@@ -64,7 +64,7 @@ public class DynamicSizedIntegerQueue {
        */
 
         if (size <= arr.length / 4) {
-            Integer[] aux = new Integer[arr.length - arr.length / 2];
+            String[] aux = new String[arr.length - arr.length / 2];
             for (int i = 0; i < aux.length; aux[i] = arr[i], i++);
             arr = aux;
         }
@@ -77,9 +77,13 @@ public class DynamicSizedIntegerQueue {
            f(head, tail) <= 75%, then bring all items to the start of this array... update head and tail
        */
         if (size == arr.length) {
-            Integer[] aux = new Integer[arr.length * 2];
+            String[] aux = new String[arr.length * 2];
             for (int i = 0; i < arr.length; aux[i] = arr[i], i++) ;
             arr = aux;
         }
+    }
+
+    private int headAndTailSize() {
+        return tail - head;
     }
 }

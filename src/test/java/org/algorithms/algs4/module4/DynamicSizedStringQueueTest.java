@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;
 
-class DynamicSizedIntegerQueueTest {
+class DynamicSizedStringQueueTest {
 
     @Test
     void queueInitializationTest() {
-        final DynamicSizedIntegerQueue q = new DynamicSizedIntegerQueue();
+        final DynamicSizedStringQueue q = new DynamicSizedStringQueue();
         Assertions.assertEquals(0, q.size());
         Assertions.assertEquals(0, q.headIndex());
         Assertions.assertEquals(0, q.tailIndex());
@@ -22,17 +22,17 @@ class DynamicSizedIntegerQueueTest {
 
     @Test
     void simplePushesPeeksAndPopsTest() {
-        final DynamicSizedIntegerQueue q = new DynamicSizedIntegerQueue();
-        q.push(11);
+        final DynamicSizedStringQueue q = new DynamicSizedStringQueue();
+        q.push("AA");
         Assertions.assertEquals(1, q.size());
         Assertions.assertEquals(0, q.headIndex());
         Assertions.assertEquals(1, q.tailIndex());
         for (int i = 1; i <= 10; i++) {
-            q.push(11 + i);
+            q.push("BB" + i);
         }
         Assertions.assertEquals(11, q.size());
-        Assertions.assertEquals(21, q.tail());
-        Assertions.assertEquals(21, q.peek());
+        Assertions.assertEquals("BB10", q.tail());
+        Assertions.assertEquals("AA", q.peek());
     }
 
 }
