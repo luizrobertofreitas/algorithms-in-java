@@ -34,14 +34,6 @@ public class DynamicSizedStringQueue {
         return size;
     }
 
-    public int headIndex() {
-        return head;
-    }
-
-    public int tailIndex() {
-        return tail;
-    }
-
     public int arraySize() {
         return arr.length;
     }
@@ -50,26 +42,8 @@ public class DynamicSizedStringQueue {
         return size == 0;
     }
 
-    public String head() {
-        if (size == 0) throw new NoSuchElementException();
-        return arr[head];
-    }
-
-    public String tail() {
-        if (size == 0) throw new NoSuchElementException();
-        return arr[tail - 1];
-    }
-
     private void sizeDown() {
-        /*
-         TODO make a calculation about the remaining items in queue, by formula: f(head, tail) = (tail - head) * 100
-         For:
-           f(head, tail) <= 25%, then shrink to half (arr.length / 2)
-           also bring all items from head -> tail to the start of new array... update head and tail
-       */
-
-        // TODO recalculate head and tail
-        int headAndTailDistance = tail - head;
+       int headAndTailDistance = tail - head;
 
         if (size <= arr.length / 4) {
             String[] aux = new String[arr.length / 2];
@@ -81,11 +55,6 @@ public class DynamicSizedStringQueue {
     }
 
     private void sizeUp() {
-        /*
-         TODO make a calculation about the items in queue, by formula: f(head, tail) = (tail - head) * 100
-         For:
-           f(head, tail) <= 75%, then bring all items to the start of this array... update head and tail
-       */
         if (size == arr.length) {
             String[] aux = new String[arr.length * 2];
             for (int i = 0; i < arr.length; aux[i] = arr[i], i++) ;

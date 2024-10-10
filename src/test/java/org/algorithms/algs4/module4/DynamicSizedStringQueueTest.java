@@ -11,12 +11,9 @@ class DynamicSizedStringQueueTest {
     void queueInitializationTest() {
         final DynamicSizedStringQueue q = new DynamicSizedStringQueue();
         Assertions.assertEquals(0, q.size());
-        Assertions.assertEquals(0, q.headIndex());
-        Assertions.assertEquals(0, q.tailIndex());
+        Assertions.assertTrue(q.isEmpty());
         Assertions.assertThrows(NoSuchElementException.class, q::dequeue);
         Assertions.assertThrows(NoSuchElementException.class, q::peek);
-        Assertions.assertThrows(NoSuchElementException.class, q::head);
-        Assertions.assertThrows(NoSuchElementException.class, q::tail);
         Assertions.assertThrows(IllegalArgumentException.class, () -> q.enqueue(null));
     }
 
@@ -29,7 +26,6 @@ class DynamicSizedStringQueueTest {
             q.enqueue("BB" + i);
         }
         Assertions.assertEquals(11, q.size());
-        Assertions.assertEquals("BB10", q.tail());
         Assertions.assertEquals("AA", q.peek());
         Assertions.assertEquals("AA", q.dequeue());
         int count = 1;
