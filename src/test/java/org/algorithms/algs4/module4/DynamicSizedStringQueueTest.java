@@ -13,26 +13,31 @@ class DynamicSizedStringQueueTest {
         Assertions.assertEquals(0, q.size());
         Assertions.assertEquals(0, q.headIndex());
         Assertions.assertEquals(0, q.tailIndex());
-        Assertions.assertThrows(NoSuchElementException.class, q::pop);
+        Assertions.assertThrows(NoSuchElementException.class, q::dequeue);
         Assertions.assertThrows(NoSuchElementException.class, q::peek);
         Assertions.assertThrows(NoSuchElementException.class, q::head);
         Assertions.assertThrows(NoSuchElementException.class, q::tail);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> q.push(null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> q.enqueue(null));
     }
 
     @Test
     void simplePushesPeeksAndPopsTest() {
         final DynamicSizedStringQueue q = new DynamicSizedStringQueue();
-        q.push("AA");
+        q.enqueue("AA");
         Assertions.assertEquals(1, q.size());
-        Assertions.assertEquals(0, q.headIndex());
-        Assertions.assertEquals(1, q.tailIndex());
         for (int i = 1; i <= 10; i++) {
-            q.push("BB" + i);
+            q.enqueue("BB" + i);
         }
         Assertions.assertEquals(11, q.size());
         Assertions.assertEquals("BB10", q.tail());
         Assertions.assertEquals("AA", q.peek());
-    }
+        Assertions.assertEquals("AA", q.dequeue());
+        int count = 1;
+        while(!q.isEmpty()) {
+            Assertions.assertEquals("BB" + count++, q.dequeue());
+        }
 
+        Assertions.assertEquals(0, q.size());
+        Assertions.assertTrue(q.arraySize() < 2);
+    }
 }

@@ -3,26 +3,23 @@ package org.algorithms.algs4.module4;
 import java.util.NoSuchElementException;
 
 public class DynamicSizedStringQueue {
-
-    private static final int SIZE_DOWN_THRESHOLD = 25;
-    private static final int REBALANCE_THRESHOLD = 50;
     private String[] arr = new String[1];
     private int head = 0;
     private int tail = 0;
 
     private int size = 0;
 
-    public void push(String s) {
+    public void enqueue(String s) {
         if (s == null) throw new IllegalArgumentException();
         arr[tail++] = s;
         size++;
         sizeUp();
     }
 
-    public String pop() {
+    public String dequeue() {
         if (size < 1) throw new NoSuchElementException();
         String r = arr[head];
-        arr[head--] = null;
+        arr[head++] = null;
         size--;
         sizeDown();
         return r;
@@ -45,6 +42,14 @@ public class DynamicSizedStringQueue {
         return tail;
     }
 
+    public int arraySize() {
+        return arr.length;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
     public String head() {
         if (size == 0) throw new NoSuchElementException();
         return arr[head];
@@ -63,10 +68,15 @@ public class DynamicSizedStringQueue {
            also bring all items from head -> tail to the start of new array... update head and tail
        */
 
+        // TODO recalculate head and tail
+        int headAndTailDistance = tail - head;
+
         if (size <= arr.length / 4) {
-            String[] aux = new String[arr.length - arr.length / 2];
-            for (int i = 0; i < aux.length; aux[i] = arr[i], i++);
+            String[] aux = new String[arr.length / 2];
+            for (int i = 0; i < aux.length; aux[i] = arr[head + i], i++);
             arr = aux;
+            head = 0;
+            tail = head + headAndTailDistance;
         }
     }
 
@@ -81,9 +91,5 @@ public class DynamicSizedStringQueue {
             for (int i = 0; i < arr.length; aux[i] = arr[i], i++) ;
             arr = aux;
         }
-    }
-
-    private int headAndTailSize() {
-        return tail - head;
     }
 }
