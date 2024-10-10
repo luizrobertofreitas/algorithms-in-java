@@ -81,6 +81,19 @@ public class Deque implements Iterable<String> {
         return first.current;
     }
 
+    public static class Item<T> {
+        T current;
+        Item<T> previous, next;
+
+        public Item() {}
+
+        public Item(Item<T> previous, T current, Item<T> next) {
+            this.previous = previous;
+            this.current = current;
+            this.next = next;
+        }
+    }
+
     public static class DequeIterator implements Iterator<String> {
         private final Deque deque;
 

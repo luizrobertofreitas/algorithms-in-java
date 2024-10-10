@@ -72,4 +72,12 @@ class RandomizedQueueTest {
         Assertions.assertEquals(0, rd.size());
         Assertions.assertTrue(rd.isEmpty());
     }
+
+    void t() {
+        String[] a = new String[] {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","X","Y","Z"};
+        for (int i = 0, j = 0; i < 100000; i++) {
+            if (j == a.length) j = 0;
+            System.out.print(a[j++] + i + " ");
+        }
+    }
 }
