@@ -3,7 +3,10 @@ package org.algorithms.algs4.module4;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayDeque;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Queue;
 
 class DynamicSizedStringQueueTest {
 

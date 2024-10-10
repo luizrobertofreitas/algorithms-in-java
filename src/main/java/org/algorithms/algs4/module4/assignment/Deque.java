@@ -3,10 +3,10 @@ package org.algorithms.algs4.module4.assignment;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Deque<T> implements Iterable<T> {
+public class Deque implements Iterable<String> {
 
-    private Item<T> first;
-    private Item<T> last;
+    private Item<String> first;
+    private Item<String> last;
     private int size = 0;
 
     public boolean isEmpty() {
@@ -17,7 +17,7 @@ public class Deque<T> implements Iterable<T> {
         return size;
     }
 
-    public void addFirst(T item) {
+    public void addFirst(String item) {
         if (item == null) throw new IllegalArgumentException();
         if (first == null) {
             first = new Item<>(null, item, null);
@@ -30,7 +30,7 @@ public class Deque<T> implements Iterable<T> {
         size++;
     }
 
-    public void addLast(T item) {
+    public void addLast(String item) {
         if (item == null) throw new IllegalArgumentException();
         if (first == null) {
             first = new Item<>(null, item, null);
@@ -43,9 +43,9 @@ public class Deque<T> implements Iterable<T> {
         size++;
     }
 
-    public T removeFirst() {
+    public String removeFirst() {
         if (isEmpty()) throw new NoSuchElementException();
-        T current = first.current;
+        String current = first.current;
         if (first.next == null) {
             first = null;
             last = null;
@@ -57,9 +57,9 @@ public class Deque<T> implements Iterable<T> {
         return current;
     }
 
-    public T removeLast() {
+    public String removeLast() {
         if (isEmpty()) throw new NoSuchElementException();
-        T current = last.current;
+        String current = last.current;
         if (last.previous == null) {
             last = null;
             first = null;
@@ -72,14 +72,19 @@ public class Deque<T> implements Iterable<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
-        return new DequeIterator<>(this);
+    public Iterator<String> iterator() {
+        return new DequeIterator(this);
     }
 
-    public static class DequeIterator<T> implements Iterator<T> {
-        private final Deque<T> deque;
+    protected String sample() {
+        if (isEmpty()) throw new NoSuchElementException();
+        return first.current;
+    }
 
-        protected DequeIterator(Deque<T> deque) {
+    public static class DequeIterator implements Iterator<String> {
+        private final Deque deque;
+
+        protected DequeIterator(Deque deque) {
             this.deque = deque;
         }
         @Override
@@ -88,7 +93,7 @@ public class Deque<T> implements Iterable<T> {
         }
 
         @Override
-        public T next() {
+        public String next() {
             if (deque.isEmpty()) {
                 throw new NoSuchElementException();
             }

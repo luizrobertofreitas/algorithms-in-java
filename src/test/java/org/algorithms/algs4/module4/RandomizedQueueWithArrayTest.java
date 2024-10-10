@@ -1,21 +1,22 @@
-package org.algorithms.algs4.module4.assignment;
+package org.algorithms.algs4.module4;
 
+import org.algorithms.algs4.module4.RandomizedQueueWithArray;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class RandomizedQueueTest {
+class RandomizedQueueWithArrayTest {
 
     @Test
     void emptyOnCreateTest() {
-        final RandomizedQueue rq = new RandomizedQueue();
+        final RandomizedQueueWithArray rq = new RandomizedQueueWithArray();
         Assertions.assertTrue(rq.isEmpty());
     }
 
     @Test
     void enqueueFirstItemOnDequeTest() {
-        final RandomizedQueue rq = new RandomizedQueue();
+        final RandomizedQueueWithArray rq = new RandomizedQueueWithArray();
         rq.enqueue("1");
         Assertions.assertEquals(1, rq.size());
         Assertions.assertFalse(rq.isEmpty());
@@ -34,7 +35,7 @@ class RandomizedQueueTest {
 //            "10000000",
     })
     void enqueueMassiveItemsAndDequeueTest(int amount) {
-        final RandomizedQueue rd = new RandomizedQueue();
+        final RandomizedQueueWithArray rd = new RandomizedQueueWithArray();
         for (int i = 0; i < amount; i++) {
             rd.enqueue(String.valueOf(i));
         }
@@ -56,7 +57,7 @@ class RandomizedQueueTest {
         "100000",
     })
     void enqueueMassiveItemsAndDuplicatedDequeueTest(int amount) {
-        final RandomizedQueue rd = new RandomizedQueue();
+        final RandomizedQueueWithArray rd = new RandomizedQueueWithArray();
         for (int i = 0; i < amount; i++) {
             rd.enqueue(String.valueOf(i));
         }

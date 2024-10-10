@@ -1,4 +1,4 @@
-package org.algorithms.algs4.module4.assignment;
+package org.algorithms.algs4.module4;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,17 +9,17 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-class RandomizedQueueIteratorTest {
+class RandomizedQueueWithArrayIteratorTest {
     @Test
     void unsupportedIteratorRemoveOperationTest() {
-        final RandomizedQueue rq = new RandomizedQueue();
+        final RandomizedQueueWithArray rq = new RandomizedQueueWithArray();
         final Iterator<String> rqi = rq.iterator();
         Assertions.assertThrows(UnsupportedOperationException.class, rqi::remove);
     }
 
     @Test
     void emptyIteratorTest() {
-        final RandomizedQueue rq = new RandomizedQueue();
+        final RandomizedQueueWithArray rq = new RandomizedQueueWithArray();
         final Iterator<String> rqi = rq.iterator();
         Assertions.assertFalse(rqi.hasNext());
         Assertions.assertThrows(NoSuchElementException.class, rqi::next);
@@ -36,7 +36,7 @@ class RandomizedQueueIteratorTest {
     })
     void massiveIteratorItemsOnEnqueueTest(int size) {
         final Integer[] arr = createArray(size);
-        final RandomizedQueue rq = new RandomizedQueue();
+        final RandomizedQueueWithArray rq = new RandomizedQueueWithArray();
         for (Integer i : arr) rq.enqueue(String.valueOf(i));
         Assertions.assertEquals(size, rq.size());
 

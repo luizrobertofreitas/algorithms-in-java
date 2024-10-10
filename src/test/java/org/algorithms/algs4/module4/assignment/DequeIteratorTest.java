@@ -12,14 +12,14 @@ class DequeIteratorTest {
 
     @Test
     void unsupportedIteratorRemoveOperationTest() {
-        final Deque<String> d = new Deque<>();
+        final Deque d = new Deque();
         final Iterator<String> di = d.iterator();
         Assertions.assertThrows(UnsupportedOperationException.class, di::remove);
     }
 
     @Test
     void emptyIteratorTest() {
-        final Deque<String> d = new Deque<>();
+        final Deque d = new Deque();
         final Iterator<String> di = d.iterator();
         Assertions.assertFalse(di.hasNext());
         Assertions.assertThrows(NoSuchElementException.class, di::next);
@@ -35,14 +35,14 @@ class DequeIteratorTest {
             "10000000",
     })
     void massiveIteratorItemsOnEnqueueLastTest(int amount) {
-        final Deque<Integer> d = new Deque<>();
+        final Deque d = new Deque();
         for (int i = 0; i < amount; i++) {
-            d.addLast(i);
+            d.addLast(String.valueOf(i));
         }
-        final Iterator<Integer> di = d.iterator();
+        final Iterator<String> di = d.iterator();
         int count = 0;
         while(di.hasNext()) {
-            Assertions.assertEquals(count++, di.next());
+            Assertions.assertEquals(String.valueOf(count++), di.next());
         }
     }
 
@@ -56,14 +56,14 @@ class DequeIteratorTest {
             "10000000",
     })
     void massiveIteratorItemsOnEnqueueFirstTest(int amount) {
-        final Deque<Integer> d = new Deque<>();
+        final Deque d = new Deque();
         for (int i = 0; i < amount; i++) {
-            d.addFirst(i);
+            d.addFirst(String.valueOf(i));
         }
-        final Iterator<Integer> di = d.iterator();
+        final Iterator<String> di = d.iterator();
         int count = amount - 1;
         while(di.hasNext()) {
-            Assertions.assertEquals(count--, di.next());
+            Assertions.assertEquals(String.valueOf(count--), di.next());
         }
     }
 }
