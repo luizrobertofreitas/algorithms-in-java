@@ -1,12 +1,14 @@
 package org.algorithms.algs4.module4.assignment;
 
+import edu.princeton.cs.algs4.StdIn;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Deque implements Iterable<String> {
+public class Deque<Item> implements Iterable<Item> {
 
-    private Item<String> first;
-    private Item<String> last;
+    private Node<Item> first;
+    private Node<Item> last;
     private int size = 0;
 
     public boolean isEmpty() {
@@ -17,35 +19,35 @@ public class Deque implements Iterable<String> {
         return size;
     }
 
-    public void addFirst(String item) {
+    public void addFirst(Item item) {
         if (item == null) throw new IllegalArgumentException();
         if (first == null) {
-            first = new Item<>(null, item, null);
+            first = new Node<>(null, item, null);
             last = first;
         }
         else {
-            first.previous = new Item<>(null, item, first);
+            first.previous = new Node<>(null, item, first);
             first = first.previous;
         }
         size++;
     }
 
-    public void addLast(String item) {
+    public void addLast(Item item) {
         if (item == null) throw new IllegalArgumentException();
         if (first == null) {
-            first = new Item<>(null, item, null);
+            first = new Node<>(null, item, null);
             last = first;
         }
         else {
-            last.next = new Item<>(last, item, null);
+            last.next = new Node<>(last, item, null);
             last = last.next;
         }
         size++;
     }
 
-    public String removeFirst() {
+    public Item removeFirst() {
         if (isEmpty()) throw new NoSuchElementException();
-        String current = first.current;
+        Item current = first.current;
         if (first.next == null) {
             first = null;
             last = null;
@@ -57,9 +59,9 @@ public class Deque implements Iterable<String> {
         return current;
     }
 
-    public String removeLast() {
+    public Item removeLast() {
         if (isEmpty()) throw new NoSuchElementException();
-        String current = last.current;
+        Item current = last.current;
         if (last.previous == null) {
             last = null;
             first = null;
@@ -72,32 +74,26 @@ public class Deque implements Iterable<String> {
     }
 
     @Override
-    public Iterator<String> iterator() {
-        return new DequeIterator(this);
+    public Iterator<Item> iterator() {
+        return new DequeIterator<>(this);
     }
 
-    protected String sample() {
-        if (isEmpty()) throw new NoSuchElementException();
-        return first.current;
-    }
+    private static class Node<Item> {
+        Item current;
+        Node<Item> previous;
+        Node<Item> next;
 
-    public static class Item<T> {
-        T current;
-        Item<T> previous, next;
-
-        public Item() {}
-
-        public Item(Item<T> previous, T current, Item<T> next) {
+        public Node(Node<Item> previous, Item current, Node<Item> next) {
             this.previous = previous;
             this.current = current;
             this.next = next;
         }
     }
 
-    public static class DequeIterator implements Iterator<String> {
-        private final Deque deque;
+    private static class DequeIterator<Item> implements Iterator<Item> {
+        private final Deque<Item> deque;
 
-        protected DequeIterator(Deque deque) {
+        public DequeIterator(Deque<Item> deque) {
             this.deque = deque;
         }
         @Override
@@ -106,7 +102,7 @@ public class Deque implements Iterable<String> {
         }
 
         @Override
-        public String next() {
+        public Item next() {
             if (deque.isEmpty()) {
                 throw new NoSuchElementException();
             }
@@ -117,5 +113,11 @@ public class Deque implements Iterable<String> {
         public void remove() {
             throw new UnsupportedOperationException();
         }
+    }
+
+    public static void main(String[] args) {
+        final Deque<String> q = new Deque<>();
+        while (!StdIn.isEmpty()) q.addFirst(StdIn.readString());
+        while (!q.isEmpty()) System.out.println(q.removeFirst());
     }
 }

@@ -12,14 +12,14 @@ import java.util.NoSuchElementException;
 class RandomizedQueueIteratorTest {
     @Test
     void unsupportedIteratorRemoveOperationTest() {
-        final RandomizedQueue rq = new RandomizedQueue();
+        final RandomizedQueue<String> rq = new RandomizedQueue<>();
         final Iterator<String> rqi = rq.iterator();
         Assertions.assertThrows(UnsupportedOperationException.class, rqi::remove);
     }
 
     @Test
     void emptyIteratorTest() {
-        final RandomizedQueue rq = new RandomizedQueue();
+        final RandomizedQueue<String> rq = new RandomizedQueue<>();
         final Iterator<String> rqi = rq.iterator();
         Assertions.assertFalse(rqi.hasNext());
         Assertions.assertThrows(NoSuchElementException.class, rqi::next);
@@ -36,7 +36,7 @@ class RandomizedQueueIteratorTest {
     })
     void massiveIteratorItemsOnEnqueueTest(int size) {
         final Integer[] arr = createArray(size);
-        final RandomizedQueue rq = new RandomizedQueue();
+        final RandomizedQueue<String> rq = new RandomizedQueue<>();
         for (Integer i : arr) rq.enqueue(String.valueOf(i));
         Assertions.assertEquals(size, rq.size());
 

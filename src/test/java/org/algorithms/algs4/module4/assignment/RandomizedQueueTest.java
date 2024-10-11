@@ -9,13 +9,13 @@ class RandomizedQueueTest {
 
     @Test
     void emptyOnCreateTest() {
-        final RandomizedQueue rq = new RandomizedQueue();
+        final RandomizedQueue<String> rq = new RandomizedQueue<>();
         Assertions.assertTrue(rq.isEmpty());
     }
 
     @Test
     void enqueueFirstItemOnDequeTest() {
-        final RandomizedQueue rq = new RandomizedQueue();
+        final RandomizedQueue<String> rq = new RandomizedQueue<>();
         rq.enqueue("1");
         Assertions.assertEquals(1, rq.size());
         Assertions.assertFalse(rq.isEmpty());
@@ -34,18 +34,18 @@ class RandomizedQueueTest {
 //            "10000000",
     })
     void enqueueMassiveItemsAndDequeueTest(int amount) {
-        final RandomizedQueue rd = new RandomizedQueue();
+        final RandomizedQueue<String> rq = new RandomizedQueue<>();
         for (int i = 0; i < amount; i++) {
-            rd.enqueue(String.valueOf(i));
+            rq.enqueue(String.valueOf(i));
         }
-        Assertions.assertEquals(amount, rd.size());
+        Assertions.assertEquals(amount, rq.size());
         for (int i = 0; i < amount; i++) {
-            String current = rd.dequeue();
+            String current = rq.dequeue();
             int currentInt = Integer.parseInt(current);
             Assertions.assertNotEquals(String.valueOf(currentInt + 1), current);
         }
-        Assertions.assertEquals(0, rd.size());
-        Assertions.assertTrue(rd.isEmpty());
+        Assertions.assertEquals(0, rq.size());
+        Assertions.assertTrue(rq.isEmpty());
     }
 
     @ParameterizedTest
@@ -56,21 +56,21 @@ class RandomizedQueueTest {
         "100000",
     })
     void enqueueMassiveItemsAndDuplicatedDequeueTest(int amount) {
-        final RandomizedQueue rd = new RandomizedQueue();
+        final RandomizedQueue<String> rq = new RandomizedQueue<>();
         for (int i = 0; i < amount; i++) {
-            rd.enqueue(String.valueOf(i));
+            rq.enqueue(String.valueOf(i));
         }
-        Assertions.assertEquals(amount, rd.size());
+        Assertions.assertEquals(amount, rq.size());
         StringBuilder dequeued = new StringBuilder();
         for (int i = 0; i < amount; i++) {
-            String current = rd.dequeue();
+            String current = rq.dequeue();
             int currentInt = Integer.parseInt(current);
             Assertions.assertNotEquals(String.valueOf(currentInt + 1), current);
             Assertions.assertFalse(dequeued.toString().contains("," + current + ","));
             dequeued.append(current).append(",");
         }
-        Assertions.assertEquals(0, rd.size());
-        Assertions.assertTrue(rd.isEmpty());
+        Assertions.assertEquals(0, rq.size());
+        Assertions.assertTrue(rq.isEmpty());
     }
 
     void t() {
