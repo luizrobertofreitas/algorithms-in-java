@@ -32,6 +32,27 @@ class SortersTest {
         System.out.println("************************************************************************************");
     }
 
+    @Timeout(20)
+    @ParameterizedTest
+    @CsvSource({
+            "10",
+            "100",
+            "1000",
+            "10000",
+    })
+    void insertionSortTest(Integer size) {
+        System.out.println("Size: " + size);
+        Integer[] arr = generateArray(size);
+        final String expected = Arrays.toString(arr);
+        System.out.println("Expected: " + expected);
+        Integer[] shuffleArr = shuffleArray(arr);
+        System.out.println("Shuffle: " + Arrays.toString(shuffleArr));
+        Sorters.INSERTION_SORT.accept(shuffleArr);
+        System.out.println("Sorted: " + Arrays.toString(shuffleArr));
+        Assertions.assertEquals(expected, Arrays.toString(shuffleArr));
+        System.out.println("************************************************************************************");
+    }
+
     private Integer[] generateArray(int size) {
         Integer[] a = new Integer[size];
         for (int i = 0; i < size; a[i] = i, i++);
