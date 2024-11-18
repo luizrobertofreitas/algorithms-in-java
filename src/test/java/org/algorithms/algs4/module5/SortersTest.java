@@ -45,13 +45,9 @@ class SortersTest {
         System.out.println("Size: " + size);
         Integer[] arr = generateArray(size);
         final String expected = Arrays.toString(arr);
-        System.out.println("Expected: " + expected);
         Integer[] shuffleArr = shuffleArray(arr);
-        System.out.println("Shuffle: " + Arrays.toString(shuffleArr));
         Sorters.INSERTION_SORT.accept(shuffleArr);
-        System.out.println("Sorted: " + Arrays.toString(shuffleArr));
         Assertions.assertEquals(expected, Arrays.toString(shuffleArr));
-        System.out.println("************************************************************************************");
     }
 
     @Timeout(20)
@@ -67,13 +63,9 @@ class SortersTest {
         System.out.println("Size: " + size);
         Integer[] arr = generateArray(size);
         final String expected = Arrays.toString(arr);
-        System.out.println("Expected: " + expected);
         Integer[] shuffleArr = shuffleArray(arr);
-        System.out.println("Shuffle: " + Arrays.toString(shuffleArr));
         Sorters.SHELL_SORT.accept(shuffleArr);
-        System.out.println("Sorted: " + Arrays.toString(shuffleArr));
         Assertions.assertEquals(expected, Arrays.toString(shuffleArr));
-        System.out.println("************************************************************************************");
     }
 
 //    @Timeout(20)
