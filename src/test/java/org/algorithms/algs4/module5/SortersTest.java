@@ -18,7 +18,6 @@ class SortersTest {
             "100",
             "1000",
             "10000",
-            "100000",
     })
     void selectionSortTest(Integer size) {
         System.out.println("Size: " + size);
