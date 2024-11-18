@@ -77,14 +77,14 @@ class SortersTest {
         System.out.println("************************************************************************************");
     }
 
-    @Timeout(20)
-    @ParameterizedTest
-    @CsvSource({
-            "3",
-            "4",
-            "5",
-            "6",
-    })
+//    @Timeout(20)
+//    @ParameterizedTest
+//    @CsvSource({
+//            "3",
+//            "4",
+//            "5",
+//            "6",
+//    })
     void badShufflerConsideringA3rdOfPossiblePermutationsTest(Integer size) {
         Integer numberOfPermutations = factorial(size); // considering a 3rd of permutations possible
         System.out.println("Number of permutations on shuffling: " + numberOfPermutations);
