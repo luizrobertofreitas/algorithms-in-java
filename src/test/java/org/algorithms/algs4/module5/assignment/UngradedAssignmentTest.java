@@ -1,6 +1,7 @@
 package org.algorithms.algs4.module5.assignment;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -8,6 +9,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Tag("Module5")
 class UngradedAssignmentTest {
 
     @ParameterizedTest

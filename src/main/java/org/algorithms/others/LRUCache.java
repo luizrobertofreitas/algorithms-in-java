@@ -12,8 +12,10 @@ Design and implement a data structure for the Least Recently Used (LRU) cache th
 */
 public class LRUCache {
     private final int[][] cache;
+    private int lruIdx;
     public LRUCache(int capacity) {
         cache = new int[capacity][3];
+        lruIdx = capacity - 1;
         for (int i = 0; i < cache.length; i++)
             replace(i, -1, -1, 0);
     }
@@ -28,15 +30,8 @@ public class LRUCache {
             i++;
         }
 
-        if (isFull()) {
-            int lruIndex = 0;
-            for (int j = 1; j < cache.length; j++) {
-                if (cache[j][2] < cache[lruIndex][2]) lruIndex = j;
-            }
-            replace(lruIndex, key, value, 0);
-        } else {
-            replace(i, key, value, 0);
-        }
+        if (isFull()) replace(lruIdx, key, value, 0);
+        else replace(i, key, value, 0);
     }
 
     public int get(int key) {
@@ -57,6 +52,9 @@ public class LRUCache {
 
     public void incrementWeight(int idx) {
         cache[idx][2]++;
+        if (idx == lruIdx)
+            for (int i = 0; i < cache.length && cache[i][0] != -1; i++)
+                if (cache[i][2] < cache[lruIdx][2]) lruIdx = i;
     }
 
     public boolean isFull() {
