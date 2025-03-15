@@ -19,8 +19,29 @@ class ParenthesisMatchTest {
             "((()()())()())(((((((((())))))))),false",
             "(((baz)()())()(foo bar bits)),true",
             "((2*(2+1)(0-1)(3/2))(4*100)5*(foo bar bits)),true",
+            "(()(()()()()(),false"
     })
-    void run(String input, Boolean expectedResult) {
+    void solution1Test(String input, Boolean expectedResult) {
         Assertions.assertEquals(expectedResult, ParenthesisMatch.SOLUTION.test(input));
+    }
+
+    @Timeout(1) // under a second
+    @ParameterizedTest
+    @CsvSource({
+        "(()()())(),true",
+        "(()()())()(,false",
+        "(()()())()((((()))))()(()),true",
+        "((()()())()(())),true",
+        "((()()())()()),true",
+        "((()()())()())(((((((((())))))))),false",
+        "(((baz)()())()(foo bar bits)),true",
+        "((2*(2+1)(0-1)(3/2))(4*100)5*(foo bar bits)),true",
+        "(()(()()()()(),false",
+        "{[()]()}({[()]}){}[](),true",
+        "{[([)]()}({[()]}){}[](),false",
+        "{[()]()}({[()]}){}[](}),false",
+    })
+    void solution2Test(String input, Boolean expectedResult) {
+        Assertions.assertEquals(expectedResult, ParenthesisMatch.SOLUTION_2.test(input));
     }
 }
