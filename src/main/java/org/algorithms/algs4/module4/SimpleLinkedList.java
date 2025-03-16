@@ -65,6 +65,18 @@ public class SimpleLinkedList<E> {
         return first == null & first == last;
     }
 
+    public boolean containCycles() {
+        SimpleLinkedNode<E> slow = first;
+        SimpleLinkedNode<E> fast = first.next.next;
+
+        while(fast != null) {
+            if (slow == fast) return true;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return false;
+    }
+
     private void validate() {
         if (isEmpty()) throw new RuntimeException("List is already empty");
     }
