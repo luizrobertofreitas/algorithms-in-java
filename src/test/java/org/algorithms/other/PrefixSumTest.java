@@ -14,8 +14,19 @@ class PrefixSumTest {
     @CsvSource(delimiter = ';', value = {
         "1,2,3,4,5;[1, 3, 6, 10, 15]"
     })
-    void prefixArrayGen(String input, String expected) {
+    void prefixArrayGenTest(String input, String expected) {
         Integer[] arr = ArrayCrazyOps.CONVERT_STRING_TO_INTEGER_ARRAY.apply(input);
         Assertions.assertEquals(expected, Arrays.toString(PrefixSum.PREFIX_ARRAY_GEN.apply(arr)));
+    }
+
+    @ParameterizedTest
+    @CsvSource(delimiter = ';', value = {
+        "1,2,3,4,5;1;3;9",
+        "1,2,3,4,5;1;4;14",
+        "1,2,3,4,5;0;4;15",
+    })
+    void sumInTheRangeTest(String input, Integer x, Integer y, Integer expected) {
+        Integer[] arr = ArrayCrazyOps.CONVERT_STRING_TO_INTEGER_ARRAY.apply(input);
+        Assertions.assertEquals(expected, PrefixSum.SUM_IN_THE_RANGE.apply(arr, x, y));
     }
 }
