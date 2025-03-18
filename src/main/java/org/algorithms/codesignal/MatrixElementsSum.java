@@ -21,8 +21,8 @@ public class MatrixElementsSum {
             if (c == matrix[0].length) break; // if we reached out the end of the columns, bye
             sum += matrix[r][c]; // since haunted rooms are 0 and doesn't impact in the sum, no problem summing them up
             if (matrix[r][c] == 0) { // if it is a haunted room, we skip the rest of the column
-                c++;
-                r=-1;
+                c++; // move to the next column
+                r=-1; // reset the row. -1 due to the r++ in the end of loop exec
                 continue;
             }
             if (r + 1 == matrix.length) { // if we were able to reach the last row
